@@ -77,17 +77,10 @@ function asAmirror(str) {
   //Ej: Recibe ---> "The Henry Challenge is close!" || Devuelve ---> "ehT yrneH egnellahC si !esolc"
   //Escribe tu código aquí
 
-  var newstr = '';
-  for (let i=0;i<str.length;i++){
-    if (str[i]=' '){
-      for (let j=i-1;str[j]!==' ';j--){
-        newstr=newstr+str[j];
-      }
-      newstr=newstr+' ';
-    }
-  }
-return newstr;
-
+  var cambios = str.split(" ").map(function(el){
+    return el.split("").reverse().join("")
+  })
+return cambios.join(' ');
 } 
 
 
@@ -126,20 +119,20 @@ function sortArray(arr) {
   //La función recibe una matriz de strings. Ordena la matriz en orden creciente de longitudes de cadena
   //Ej: Recibe ---> ["You", "are", "beautiful", "looking"] || Devuelve ---> [“You", "are", "looking", "beautiful"]
   //Escribe tu código aquí
-var newarr=arr;
-for (let j=0;j<newarr.length-2;j++){
-for (let i=0;i<newarr.length-2;i++){
-  if (newarr[i].length>newarr[i+1].length){
-
-{newarr[i+1]=newarr[i];
-newarr[i]=newarr[i+1];
-
+var cambio= true;
+while(cambio){
+  cambio=false;
+  for(var i=0;i<arr.length-1;i++){
+    if (arr[i].length > arr[i+1].length){
+      var aux = arr[i];
+      arr[i]=arr[i+1];
+      arr[i+1]=aux;
+      cambio=true;
+  }
 }
 }
-return newarr;
-  
+return arr;
 }
-
 
 function buscoInterseccion(arreglo1, arreglo2){
   //Existen dos arrays, cada uno con 5 números. A partir de ello, escribir una función que permita 
@@ -180,6 +173,5 @@ module.exports = {
    capicua,
    deleteAbc,
    sortArray,
-   buscoInterseccion,
+   buscoInterseccion
 };
-
